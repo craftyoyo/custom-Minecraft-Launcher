@@ -24,7 +24,7 @@ namespace Minecraft_Launcher
         public MainWindow()
         {
             string JavaPath = Environment.GetEnvironmentVariable("JAVA_HOME");
-            if (!string.IsNullOrEmpty(JavaPath))
+            if (string.IsNullOrEmpty(JavaPath))
             {
                 MessageBox.Show("La variable d'environnement JAVA_HOME semble vide ou n'existe pas", "Java non détecté");
                 MessageBox.Show("Java va être télécharger sous la version la plus récente", "Téléchargement de Java");
