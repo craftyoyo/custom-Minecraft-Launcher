@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace Minecraft_Launcher
 {
@@ -22,6 +23,18 @@ namespace Minecraft_Launcher
     {
         public MainWindow()
         {
+            string JavaPath = Environment.GetEnvironmentVariable("JAVA_HOME");
+            if (!string.IsNullOrEmpty(JavaPath))
+            {
+                MessageBox.Show("La variable d'environnement JAVA_HOME semble vide ou n'existe pas", "Java non détecté");
+
+            }
+            else
+            {
+                MessageBox.Show("Java semble installé", "Java");
+
+            }
+
             InitializeComponent();
         }
     }
