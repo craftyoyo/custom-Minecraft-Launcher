@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net;
+using System.Diagnostics;
 using Microsoft.Win32;
 
 namespace Minecraft_Launcher
@@ -25,29 +26,24 @@ namespace Minecraft_Launcher
         public void download(string URL, string path)
         {
             WebClient wc = new WebClient();
-            wc.DownloadFile(URL, path);
-            
+            //wc.DownloadFile(URL, path);
+            wc.OpenRead("https://www.java.com/fr/download/manual.jsp");
+
         }
 
         public MainWindow()
         {
-            if (!string.IsNullOrEmpty(GetJavaInstallationPath()))
+            if (string.IsNullOrEmpty(GetJavaInstallationPath()))
             {
-                MessageBox.Show("La variable d'environnement JAVA_HOME semble vide ou n'existe pas", "Java non détecté");
-                MessageBox.Show("Java va être télécharger sous la version la plus récente", "Téléchargement de Java");
-
-               /* string UserProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
-                string DownloadFolder = UserProfile + "\\Downloads";
-               */
-
+                MessageBox.Show("Java semble ne pas êtres installé, une fenêtre va s'ouvrir pour le télécharger", "Java non détecté");
+                Process.Start("https://www.java.com/fr/download/manual.jsp");
             }
             else
             {
-                MessageBox.Show("Java semble installé", "Java");
-                MessageBox.Show(GetJavaInstallationPath(), "");
+                InitializeComponent();
+
             }
 
-            InitializeComponent();
         }
 
         static string GetJavaInstallationPath()
